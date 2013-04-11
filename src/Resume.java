@@ -6,4 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 public class Resume {
+    private Name name;
+    public String toString() {
+        return name.toString();
+    }
+
 }
