@@ -16,7 +16,11 @@ public class Jobseeker {
         job.apply();
     }
 
-    public Collection<Job> list() {
+    public Collection<Job> listSavedJobs() {
+        return null;
+    }
+
+    public Collection<Job> listAppliedJobs() {
         return null;
     }
 }
