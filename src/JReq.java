@@ -13,12 +13,10 @@ public class JReq implements Job {
     }
 
     @Override
-    public void apply() {
-
-    }
-
-    @Override
     public String toString() {
         return title;
+    }
+
+    public void apply(Resume resume) {
     }
 }

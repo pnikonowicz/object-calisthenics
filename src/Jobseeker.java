@@ -9,13 +9,20 @@ import java.util.Collection;
  */
 public class Jobseeker {
     private String name;
+    private Resume resume;
 
     public void save(Job job) {
 
     }
 
     public void apply(Job job) {
-        job.apply();
+        if(job instanceof JReq) {
+            ((JReq) job).apply(resume);
+        }
+
+        if(job instanceof ATS) {
+            ((ATS)job).apply();
+        }
     }
 
     public Collection<Job> listSavedJobs() {
