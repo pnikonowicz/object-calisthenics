@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +11,10 @@ import java.util.Collection;
 public class Jobseeker {
     private String name;
     private Resume resume;
+    Collection<Job> savedJobs = Collections.emptyList();
 
     public void save(Job job) {
-
+        savedJobs.add(job);
     }
 
     public void apply(Job job) {
@@ -26,7 +28,7 @@ public class Jobseeker {
     }
 
     public Collection<Job> listSavedJobs() {
-        return null;
+        return savedJobs;
     }
 
     public Collection<Job> listAppliedJobs() {
