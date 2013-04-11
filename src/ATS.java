@@ -6,8 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 public class ATS implements Job  {
+    private String title;
+
     @Override
     public void apply() {
 
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }
