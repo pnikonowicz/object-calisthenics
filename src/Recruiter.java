@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -10,13 +11,14 @@ import java.util.Date;
  */
 public class Recruiter {
     private String name;
+    private Collection<Job> jobs = Collections.emptyList();
 
     public void post(Job job) {
-
+         jobs.add(job);
     }
 
     public Collection<Job> list() {
-        return null;
+        return jobs;
     }
 
     public Collection<Jobseeker> whoAppliedToJobOnDate(Job job, Date date) {
