@@ -37,11 +37,13 @@ public class JobSeeker {
     }
 
     public Collection<Job> listSavedJobs() {
-        return jobRepository.allSavedJobsFor(this);
+        Query jobSeekerQuery = new WasThisTheJobSeeker(this);
+        return jobRepository.findJobs(jobSeekerQuery);
     }
 
     public Collection<Job> listAppliedJobs() {
-        return jobRepository.allAppliedJobsFor(this);
+        Query jobSeekerQuery = new WasThisTheJobSeeker(this);
+        return jobRepository.findJobs(jobSeekerQuery);
     }
 
     public String toString() {

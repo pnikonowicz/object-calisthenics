@@ -24,23 +24,15 @@ public class JobRepository {
         applicationRepository.save(application);
     }
 
-    public Collection<Job> all() {
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public Collection<Job> allSavedJobsFor(JobSeeker jobSeeker) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public Collection<Job> allAppliedJobsFor(JobSeeker jobSeeker) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
-
     public Collection<JobSeeker> findJobSeekers(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
     public Collection<ApplicationNumber> findApplicationNumbers(Query query) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public Collection<Job> findJobs(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }

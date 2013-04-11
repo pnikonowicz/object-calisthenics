@@ -6,7 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 public class JobSeekerSavedForLaterJob {
+    private final JobSeeker jobSeeker;
+    private final Job job;
+
     public JobSeekerSavedForLaterJob(JobSeeker jobSeeker, Job job) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.jobSeeker = jobSeeker;
+        this.job = job;
+    }
+
+    public boolean is(JobSeeker jobSeeker) {
+        return jobSeeker.equals(this.jobSeeker);
     }
 }
