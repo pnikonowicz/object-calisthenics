@@ -9,6 +9,8 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Recruiter {
+    private String name;
+
     public void post(Job job) {
 
     }
@@ -19,5 +21,9 @@ public class Recruiter {
 
     public Collection<Jobseeker> whoAppliedToJobOnDate(Job job, Date date) {
         return null;
+    }
+
+    public String toString() {
+        return name;
     }
 }
