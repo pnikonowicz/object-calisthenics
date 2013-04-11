@@ -1,4 +1,5 @@
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +14,10 @@ public class Recruiter {
     }
 
     public Collection<Job> list() {
+        return null;
+    }
+
+    public Collection<Jobseeker> whoAppliedToJobOnDate(Job job, Date date) {
         return null;
     }
 }
