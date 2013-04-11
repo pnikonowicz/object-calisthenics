@@ -9,7 +9,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TheLadders {
-    public Collection<Jobseeker> whoAppliedToJobOn(Date date) {
+    public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
         return null;
     }
 

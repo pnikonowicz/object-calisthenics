@@ -1,5 +1,4 @@
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -25,7 +24,7 @@ public class Recruiter {
         return jobRepository.all();
     }
 
-    public Collection<Jobseeker> whoAppliedToJobOnDate(Job job, Date date) {
+    public Collection<JobSeeker> whoAppliedToJobOnDate(Job job, Date date) {
         return null;
     }
 

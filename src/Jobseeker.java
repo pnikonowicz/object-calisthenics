@@ -7,12 +7,12 @@ import java.util.Collection;
  * Time: 1:30 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Jobseeker {
+public class JobSeeker {
 
     private Resume resume;
     private final JobRepository jobRepository;
 
-    public Jobseeker(Resume resume, JobRepository jobRepository) {
+    public JobSeeker(Resume resume, JobRepository jobRepository) {
         this.resume = resume;
         this.jobRepository = jobRepository;
     }

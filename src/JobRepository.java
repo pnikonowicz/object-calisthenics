@@ -16,15 +16,15 @@ public class JobRepository {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public void saveJobFor(Jobseeker jobseeker, Job job) {
+    public void saveJobFor(JobSeeker jobSeeker, Job job) {
         //To change body of created methods use File | Settings | File Templates.
     }
 
-    public Collection<Job> allSavedJobsFor(Jobseeker jobseeker) {
+    public Collection<Job> allSavedJobsFor(JobSeeker jobSeeker) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public Collection<Job> allAppliedJobsFor(Jobseeker jobseeker) {
+    public Collection<Job> allAppliedJobsFor(JobSeeker jobSeeker) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
