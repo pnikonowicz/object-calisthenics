@@ -8,10 +8,13 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class JReq implements Job {
+    private final Resume resume;
     private Title title;
+    private Recruiter recruiter;
 
-    public JReq(Resume resume) {
-
+    public JReq(Resume resume, Recruiter recruiter) {
+        this.resume = resume;
+        this.recruiter = recruiter;
     }
 
     @Override
@@ -21,5 +24,10 @@ public class JReq implements Job {
 
     public Application apply(Resume resume) {
         return new Application(new Date(), this);
+    }
+
+    @Override
+    public boolean is(Recruiter recruiter) {
+        return recruiter.equals(this.recruiter);
     }
 }

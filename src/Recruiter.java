@@ -28,7 +28,7 @@ public class Recruiter {
         Query dateQuery = new WasJobAppliedToOnThisDate(date);
         Query jobQuery  = new WasThisJobAppliedTo(job);
         Query query     = new Conjunction(jobQuery, dateQuery);
-        return jobRepository.find(query);
+        return jobRepository.findJobSeekers(query);
     }
 
     public String toString() {

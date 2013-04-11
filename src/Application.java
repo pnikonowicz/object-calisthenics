@@ -23,4 +23,8 @@ public class Application {
     public boolean is(Date date) {
         return date.equals(this.date);
     }
+
+    public boolean is(Recruiter recruiter) {
+        return job.is(recruiter);
+    }
 }

@@ -9,6 +9,11 @@ import java.util.Date;
  */
 public class ATS implements Job  {
     private Title title;
+    private Recruiter recruiter;
+
+    public ATS(Recruiter recruiter) {
+        this.recruiter = recruiter;
+    }
 
     public Application apply() {
         return new Application(new Date(), this);
@@ -17,5 +22,10 @@ public class ATS implements Job  {
     @Override
     public String toString() {
         return title.toString();
+    }
+
+    @Override
+    public boolean is(Recruiter recruiter) {
+        return recruiter.equals(this.recruiter);
     }
 }

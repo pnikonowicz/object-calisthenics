@@ -9,11 +9,16 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TheLadders {
+    JobRepository jobRepository;
+
     public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
         return null;
     }
 
     public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
-        return null;
+        Query jobQuery = new WasThisJobAppliedTo(job);
+        Query recruiterQuery = new WasThisTheRecruiter(recruiter);
+        Query conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
+        return jobRepository.findApplicaitonNumbers(conjunctionQuery);
     }
 }

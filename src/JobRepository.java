@@ -32,7 +32,11 @@ public class JobRepository {
         //To change body of created methods use File | Settings | File Templates.
     }
 
-    public Collection<JobSeeker> find(Query query) {
+    public Collection<JobSeeker> findJobSeekers(Query query) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public Collection<ApplicationNumber> findApplicaitonNumbers(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }
