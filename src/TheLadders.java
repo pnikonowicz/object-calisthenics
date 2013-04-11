@@ -12,4 +12,8 @@ public class TheLadders {
     public Collection<Jobseeker> whoAppliedToJobOn(Date date) {
         return null;
     }
+
+    public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
+        return null;
+    }
 }
