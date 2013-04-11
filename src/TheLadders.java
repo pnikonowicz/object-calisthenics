@@ -24,6 +24,6 @@ public class TheLadders {
         Query jobQuery = new WasThisJobAppliedTo(job);
         Query recruiterQuery = new WasThisTheRecruiter(recruiter);
         Query conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
-        return jobRepository.findApplicaitonNumbers(conjunctionQuery);
+        return jobRepository.findApplicationNumbers(conjunctionQuery);
     }
 }

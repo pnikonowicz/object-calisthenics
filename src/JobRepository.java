@@ -8,17 +8,24 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class JobRepository {
+    Collection<Job> allJobs;
+    Collection<JobSeekerSavedForLaterJob> jobSeekerSavedJobs;
+    Collection<Application> appliedJobs;
 
     public void save(Job job) {
-        //To change body of created methods use File | Settings | File Templates.
+        allJobs.add(job);
+    }
+
+    public void saveJobFor(JobSeekerSavedForLaterJob savedJob) {
+        jobSeekerSavedJobs.add(savedJob);
+    }
+
+    public void save(Application application) {
+        appliedJobs.add(application);
     }
 
     public Collection<Job> all() {
         return null;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public void saveJobFor(JobSeeker jobSeeker, Job job) {
-        //To change body of created methods use File | Settings | File Templates.
     }
 
     public Collection<Job> allSavedJobsFor(JobSeeker jobSeeker) {
@@ -29,15 +36,11 @@ public class JobRepository {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public void save(Application application) {
-        //To change body of created methods use File | Settings | File Templates.
-    }
-
     public Collection<JobSeeker> findJobSeekers(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public Collection<ApplicationNumber> findApplicaitonNumbers(Query query) {
+    public Collection<ApplicationNumber> findApplicationNumbers(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }
