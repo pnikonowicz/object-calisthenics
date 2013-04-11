@@ -11,6 +11,6 @@ public class Jobseeker {
     }
 
     public void apply(Job job) {
-
+        job.apply();
     }
 }
