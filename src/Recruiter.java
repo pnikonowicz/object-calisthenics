@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Recruiter {
     private final JobRepository jobRepository;
-    private String name;
+    private Name name;
 
     public Recruiter(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
@@ -29,6 +29,6 @@ public class Recruiter {
     }
 
     public String toString() {
-        return name;
+        return name.toString();
     }
 }
