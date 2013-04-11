@@ -18,7 +18,7 @@ public class JobSeeker {
     }
 
     public void save(Job job) {
-        jobRepository.saveJobFor(new JobSeekerSavedForLaterJob(this, job));
+        jobRepository.save(new JobSeekerSavedForLaterJob(this, job));
     }
 
     public void apply(Job job) {

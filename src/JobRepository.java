@@ -16,7 +16,7 @@ public class JobRepository {
         allJobs.add(job);
     }
 
-    public void saveJobFor(JobSeekerSavedForLaterJob savedJob) {
+    public void save(JobSeekerSavedForLaterJob savedJob) {
         jobSeekerSavedJobs.add(savedJob);
     }
 
