@@ -12,7 +12,8 @@ public class TheLadders {
     JobRepository jobRepository;
 
     public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
-        return null;
+        Query dateQuery = new WasJobAppliedToOnThisDate(date);
+        return jobRepository.findJobSeekers(dateQuery);
     }
 
     public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
