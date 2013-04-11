@@ -33,7 +33,7 @@ public class JobSeeker {
 
         if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);
 
-        jobRepository.saveApplication(application);
+        jobRepository.save(application);
     }
 
     public Collection<Job> listSavedJobs() {

@@ -8,7 +8,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class JobRepository {
-    public void add(Job job) {
+    public void save(Job job) {
         //To change body of created methods use File | Settings | File Templates.
     }
 
@@ -28,7 +28,7 @@ public class JobRepository {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public void saveApplication(Application application) {
+    public void save(Application application) {
         //To change body of created methods use File | Settings | File Templates.
     }
 

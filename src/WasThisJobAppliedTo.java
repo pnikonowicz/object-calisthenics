@@ -5,13 +5,15 @@
  * Time: 3:33 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WasThisJobAppliedTo implements Query<Job> {
+public class WasThisJobAppliedTo implements Query<Application> {
+    private Job job;
+
     public WasThisJobAppliedTo(Job job) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.job = job;
     }
 
     @Override
-    public boolean assertTrue(Job job) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean assertTrue(Application application) {
+        return application.is(job);
     }
 }

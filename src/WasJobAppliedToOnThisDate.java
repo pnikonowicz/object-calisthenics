@@ -7,13 +7,15 @@ import java.util.Date;
  * Time: 3:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WasJobAppliedToOnThisDate implements Query<Job> {
+public class WasJobAppliedToOnThisDate implements Query<Application> {
+    private Date date;
+
     public WasJobAppliedToOnThisDate(Date date) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.date = date;
     }
 
     @Override
-    public boolean assertTrue(Job date) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean assertTrue(Application application) {
+        return application.is(date);
     }
 }

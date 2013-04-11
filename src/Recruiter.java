@@ -17,7 +17,7 @@ public class Recruiter {
     }
 
     public void post(Job job) {
-         jobRepository.add(job);
+         jobRepository.save(job);
     }
 
     public Collection<Job> list() {
