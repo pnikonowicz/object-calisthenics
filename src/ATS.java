@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -9,7 +11,7 @@ public class ATS implements Job  {
     private Title title;
 
     public Application apply() {
-        return null;
+        return new Application(new Date(), this);
     }
 
     @Override

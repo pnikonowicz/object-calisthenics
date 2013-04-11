@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -6,7 +8,7 @@
  * To change this template use File | Settings | File Templates.
  */
 public class JReq implements Job {
-    private String title;
+    private Title title;
 
     public JReq(Resume resume) {
 
@@ -14,10 +16,10 @@ public class JReq implements Job {
 
     @Override
     public String toString() {
-        return title;
+        return title.toString();
     }
 
     public Application apply(Resume resume) {
-        return null;
+        return new Application(new Date(), this);
     }
 }
