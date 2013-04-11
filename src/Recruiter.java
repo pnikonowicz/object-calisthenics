@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -8,5 +10,9 @@
 public class Recruiter {
     public void post(Job job) {
 
+    }
+
+    public Collection<Job> list() {
+        return null;
     }
 }
