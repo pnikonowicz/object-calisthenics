@@ -8,6 +8,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class JobRepository {
+
     public void save(Job job) {
         //To change body of created methods use File | Settings | File Templates.
     }

@@ -11,6 +11,10 @@ import java.util.Date;
 public class TheLadders {
     JobRepository jobRepository;
 
+    public TheLadders(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
+
     public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
         Query dateQuery = new WasJobAppliedToOnThisDate(date);
         return jobRepository.findJobSeekers(dateQuery);
