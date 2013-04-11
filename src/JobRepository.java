@@ -31,4 +31,8 @@ public class JobRepository {
     public void saveApplication(Application application) {
         //To change body of created methods use File | Settings | File Templates.
     }
+
+    public Collection<JobSeeker> find(Query query) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }

@@ -25,7 +25,10 @@ public class Recruiter {
     }
 
     public Collection<JobSeeker> whoAppliedToJobOnDate(Job job, Date date) {
-        return null;
+        Query dateQuery = new DateQuery();
+        Query jobQuery  = new JobQuery();
+        Query query     = new Conjunction(jobQuery, dateQuery);
+        return jobRepository.find(query);
     }
 
     public String toString() {
