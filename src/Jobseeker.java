@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -12,5 +14,9 @@ public class Jobseeker {
 
     public void apply(Job job) {
         job.apply();
+    }
+
+    public Collection<Job> list() {
+        return null;
     }
 }
