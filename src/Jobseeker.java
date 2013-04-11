@@ -9,7 +9,7 @@ import java.util.Collections;
  * To change this template use File | Settings | File Templates.
  */
 public class Jobseeker {
-    private String name;
+    private Name name;
     private Resume resume;
     Collection<Job> savedJobs = Collections.emptyList();
 
@@ -36,6 +36,6 @@ public class Jobseeker {
     }
 
     public String toString() {
-        return name;
+        return name.toString();
     }
 }
