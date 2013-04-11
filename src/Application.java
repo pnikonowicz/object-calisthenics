@@ -8,15 +8,19 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Application {
+    private final Date date;
+    private final Job job;
+
     public Application(Date date, Job job) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.date = date;
+        this.job = job;
     }
 
     public boolean is(Job job) {
-        return false;  //To change body of created methods use File | Settings | File Templates.
+        return job.equals(this.job);
     }
 
     public boolean is(Date date) {
-        return false;  //To change body of created methods use File | Settings | File Templates.
+        return date.equals(this.date);
     }
 }
