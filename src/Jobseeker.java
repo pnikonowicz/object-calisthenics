@@ -8,6 +8,8 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class Jobseeker {
+    private String name;
+
     public void save(Job job) {
 
     }
@@ -22,5 +24,9 @@ public class Jobseeker {
 
     public Collection<Job> listAppliedJobs() {
         return null;
+    }
+
+    public String toString() {
+        return name;
     }
 }
