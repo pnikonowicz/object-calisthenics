@@ -12,6 +12,7 @@ public class Jobseeker {
     private Name name;
     private Resume resume;
     Collection<Job> savedJobs = Collections.emptyList();
+    Collection<Job> appliedJobs = Collections.emptyList();
 
     public void save(Job job) {
         savedJobs.add(job);
@@ -32,7 +33,7 @@ public class Jobseeker {
     }
 
     public Collection<Job> listAppliedJobs() {
-        return null;
+        return appliedJobs;
     }
 
     public String toString() {
