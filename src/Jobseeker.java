@@ -9,4 +9,8 @@ public class Jobseeker {
     public void save(Job job) {
 
     }
+
+    public void apply(Job job) {
+
+    }
 }
