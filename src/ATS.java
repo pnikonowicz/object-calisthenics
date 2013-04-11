@@ -8,9 +8,8 @@
 public class ATS implements Job  {
     private String title;
 
-    @Override
-    public void apply() {
-
+    public Application apply() {
+        return null;
     }
 
     @Override

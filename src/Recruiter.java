@@ -10,15 +10,19 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Recruiter {
+    private final JobRepository jobRepository;
     private String name;
-    private Collection<Job> jobs = Collections.emptyList();
+
+    public Recruiter(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     public void post(Job job) {
-         jobs.add(job);
+         jobRepository.add(job);
     }
 
     public Collection<Job> list() {
-        return jobs;
+        return jobRepository.all();
     }
 
     public Collection<Jobseeker> whoAppliedToJobOnDate(Job job, Date date) {

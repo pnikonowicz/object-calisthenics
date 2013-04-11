@@ -17,6 +17,7 @@ public class JReq implements Job {
         return title;
     }
 
-    public void apply(Resume resume) {
+    public Application apply(Resume resume) {
+        return null;
     }
 }

@@ -1,5 +1,4 @@
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,29 +10,38 @@ import java.util.Collections;
 public class Jobseeker {
 
     private Resume resume;
-    Collection<Job> savedJobs = Collections.emptyList();
-    Collection<Job> appliedJobs = Collections.emptyList();
+    private final JobRepository jobRepository;
+
+    public Jobseeker(Resume resume, JobRepository jobRepository) {
+        this.resume = resume;
+        this.jobRepository = jobRepository;
+    }
 
     public void save(Job job) {
-        savedJobs.add(job);
+        jobRepository.saveJobFor(this, job);
     }
 
     public void apply(Job job) {
+        Application application = null;
         if(job instanceof JReq) {
-            ((JReq) job).apply(resume);
+             application = ((JReq) job).apply(resume);
         }
 
         if(job instanceof ATS) {
-            ((ATS)job).apply();
+            application = ((ATS)job).apply();
         }
+
+        if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);
+
+        jobRepository.saveApplication(application);
     }
 
     public Collection<Job> listSavedJobs() {
-        return savedJobs;
+        return jobRepository.allSavedJobsFor(this);
     }
 
     public Collection<Job> listAppliedJobs() {
-        return appliedJobs;
+        return jobRepository.allAppliedJobsFor(this);
     }
 
     public String toString() {
