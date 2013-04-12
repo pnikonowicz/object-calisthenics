@@ -7,10 +7,10 @@ import com.google.common.base.Predicate;
  * Time: 4:24 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WasThisTheRecruiter implements Predicate<Application> {
+public class WasThisTheRecruiterForThisApplication implements Predicate<Application> {
     private Recruiter recruiter;
 
-    public WasThisTheRecruiter(Recruiter recruiter) {
+    public WasThisTheRecruiterForThisApplication(Recruiter recruiter) {
         this.recruiter = recruiter;
     }
 

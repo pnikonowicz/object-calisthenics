@@ -27,7 +27,7 @@ public class TheLadders {
 
     public Collection<Application> list(Job job, Recruiter recruiter) {
         Predicate jobQuery = new WasThisJobAppliedTo(job);
-        Predicate recruiterQuery = new WasThisTheRecruiter(recruiter);
+        Predicate recruiterQuery = new WasThisTheRecruiterForThisApplication(recruiter);
         Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);
         return applicationRepository.find(conjunctionQuery);
     }

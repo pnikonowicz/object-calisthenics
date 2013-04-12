@@ -25,8 +25,8 @@ public class Recruiter {
          jobRepository.save(job);
     }
 
-    public Collection<Job> list() {
-        Predicate recruiterQuery = new WasThisTheRecruiter(this);
+    public Collection<Job> listJobsThatIHavePosted() {
+        Predicate<Job> recruiterQuery = new WasThisTheRecruiterForThisJob(this);
         return jobRepository.find(recruiterQuery);
     }
 
