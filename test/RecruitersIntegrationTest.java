@@ -10,6 +10,8 @@ import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Date;
 
+import static org.mockito.Mockito.mock;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -34,14 +36,14 @@ public class RecruitersIntegrationTest {
 
     @Test
     public void canPostJobs() {
-        Job job = Mockito.mock(Job.class);
+        Job job = mock(Job.class);
 
         recruiter.post(job);
     }
 
     @Test
     public void shouldBeAbleToSeeAListingOfTheJobsTheyHavePosted() {
-        Job job = Mockito.mock(Job.class);
+        Job job = mock(Job.class);
 
         Mockito.when(job.is(recruiter)).thenReturn(true);
 
@@ -54,7 +56,7 @@ public class RecruitersIntegrationTest {
 
     @Test
     public void recruitersShouldBeAbleToSeeJobSeekersWhoHaveAppliedToTheirJobsByBothJobAndDay() {
-        Job job = new ATS(recruiter);
+        Job job = new ATS(recruiter, mock(Title.class));
         LocalDate date = LocalDate.now();
         JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
         final JobSeeker jobSeeker = new JobSeeker(new Resume(), jobRepository, jobSeekerSavedJobsRepository, applicationRepository);

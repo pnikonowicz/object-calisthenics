@@ -1,5 +1,6 @@
 import org.joda.time.LocalDate;
 
+import java.io.Writer;
 import java.util.Date;
 
 /**
@@ -13,8 +14,9 @@ public class ATS implements Job  {
     private Title title;
     private Recruiter recruiter;
 
-    public ATS(Recruiter recruiter) {
+    public ATS(Recruiter recruiter, Title title) {
         this.recruiter = recruiter;
+        this.title = title;
     }
 
     public Application apply(JobSeeker jobSeeker) {
@@ -29,5 +31,10 @@ public class ATS implements Job  {
     @Override
     public boolean is(Recruiter recruiter) {
         return recruiter.equals(this.recruiter);
+    }
+
+    @Override
+    public void displayTitle(Writer writer) {
+        title.display(writer);
     }
 }

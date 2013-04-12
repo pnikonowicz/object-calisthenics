@@ -1,6 +1,11 @@
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.io.StringWriter;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,15 +32,15 @@ public class JobSeekerIntegrationTest {
 
     @Test
     public void JobSeekersCanSaveJobsOnSiteForLaterViewing() {
-        Job job = Mockito.mock(Job.class);
+        Job job = mock(Job.class);
 
         jobSeeker.save(job);
     }
 
     @Test
     public void JobSeekersCanApplyToJobsPostedByRecruiters() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
-        Job job = new ATS(recruiter);
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Job job = new ATS(recruiter, mock(Title.class));
 
         recruiter.post(job);
 
@@ -44,8 +49,8 @@ public class JobSeekerIntegrationTest {
 
     @Test
     public void JReqJobsRequireResumeToApplyToThem() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
-        Job job = new JReq(recruiter);
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Job job = new JReq(recruiter, mock(Title.class));
 
         recruiter.post(job);
 
@@ -54,13 +59,28 @@ public class JobSeekerIntegrationTest {
 
     @Test(expected = DuplicateResumeException.class)
     public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
-        Job job = new JReq(recruiter);
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Job job = new JReq(recruiter, mock(Title.class));
         JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
 
         recruiter.post(job);
         jobSeeker.apply(job);
 
         jobSeekerWithSomeoneElsesResume.apply(job);
+    }
+
+    @Test
+    public void JobSeekersShouldBeAbleToSeeListingOfJobsTheyHaveSavedForLaterViewing() {
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Job job_a = new ATS(recruiter, new Title("job A"));
+        Job job_b = new ATS(recruiter, new Title("job B"));
+        StringWriter stringWriter = new StringWriter();
+
+        jobSeeker.save(job_a);
+        jobSeeker.save(job_b);
+
+        jobSeeker.displaySavedJobs(stringWriter);
+
+        Assert.assertEquals("job A\njob B\n", stringWriter.toString());
     }
 }

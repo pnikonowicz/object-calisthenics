@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.Writer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -6,7 +9,7 @@
  * To change this template use File | Settings | File Templates.
  */
 public class Title {
-    private String name;
+    private final String name;
 
     public Title(String name) {
         this.name = name;
@@ -14,5 +17,9 @@ public class Title {
 
     public String toString() {
         return name;
+    }
+
+    public void display(Writer writer) {
+        MyWriter.write(writer, name);
     }
 }

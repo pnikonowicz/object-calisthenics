@@ -1,5 +1,8 @@
 import com.google.common.base.Predicate;
+import com.sun.xml.internal.ws.util.StringUtils;
 
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Collection;
 
 /**
@@ -44,11 +47,6 @@ public class JobSeeker {
         applicationRepository.save(application);
     }
 
-    public Collection<Job> listSavedJobs() {
-        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
-        return jobRepository.find(jobSeekerQuery);
-    }
-
     public Collection<Job> listAppliedJobs() {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobRepository.find(jobSeekerQuery);
@@ -56,5 +54,19 @@ public class JobSeeker {
 
     public String toString() {
         return resume.toString();
+    }
+
+    public void displaySavedJobs(Writer writer) {
+        Collection<JobSeekerSavedForLaterJob> savedJobs = listSavedJobs();
+
+        for(JobSeekerSavedForLaterJob savedJob : savedJobs) {
+            savedJob.displayTitle(writer);
+            MyWriter.write(writer, "\n");
+        }
+    }
+
+    private Collection<JobSeekerSavedForLaterJob> listSavedJobs() {
+        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
+        return jobSeekerSavedJobsRepository.find(jobSeekerQuery);
     }
 }

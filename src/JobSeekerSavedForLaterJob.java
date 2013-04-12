@@ -1,3 +1,5 @@
+import java.io.Writer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -16,5 +18,9 @@ public class JobSeekerSavedForLaterJob {
 
     public boolean is(JobSeeker jobSeeker) {
         return jobSeeker.equals(this.jobSeeker);
+    }
+
+    public void displayTitle(Writer writer) {
+        job.displayTitle(writer);
     }
 }

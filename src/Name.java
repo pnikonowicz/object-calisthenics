@@ -16,10 +16,6 @@ public class Name {
     }
 
     public void display(Writer writer) {
-        try {
-            writer.write(name);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MyWriter.write(writer, name);
     }
 }

@@ -1,3 +1,5 @@
+import java.io.Writer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -7,6 +9,5 @@
  */
 public interface Job {
     boolean is(Recruiter recruiter);
-
-
+    void displayTitle(Writer writer);
 }

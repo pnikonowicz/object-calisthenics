@@ -1,5 +1,6 @@
 import org.joda.time.LocalDate;
 
+import java.io.Writer;
 import java.util.Date;
 
 /**
@@ -10,11 +11,12 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class JReq implements Job {
-    private Title title;
-    private Recruiter recruiter;
+    private final Title title;
+    private final Recruiter recruiter;
 
-    public JReq(Recruiter recruiter) {
+    public JReq(Recruiter recruiter, Title title) {
         this.recruiter = recruiter;
+        this.title = title;
     }
 
     @Override
@@ -29,5 +31,10 @@ public class JReq implements Job {
     @Override
     public boolean is(Recruiter recruiter) {
         return recruiter.equals(this.recruiter);
+    }
+
+    @Override
+    public void displayTitle(Writer writer) {
+        title.display(writer);
     }
 }
