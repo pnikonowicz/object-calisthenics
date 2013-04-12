@@ -28,7 +28,7 @@ public class JobSeekerIntegrationTest {
         jobRepository = new JobRepository();
         jobSeekerSavedForLaterJobRepository = new JobSeekerSavedForLaterJobRepository();
         applicationRepository = new ApplicationRepository();
-        jobSeeker = new JobSeeker(resume);
+        jobSeeker = new JobSeeker(resume, new Name("job seeker"));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class JobSeekerIntegrationTest {
     public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
         Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job = new JReq(recruiter, mock(Title.class));
-        JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume);
+        JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, mock(Name.class));
 
         recruiter.post(job, jobRepository);
         jobSeeker.apply(job, applicationRepository);
@@ -96,5 +96,14 @@ public class JobSeekerIntegrationTest {
         jobSeeker.apply(job_b, applicationRepository);
 
         jobSeeker.displayAppliedJobs(stringWriter, jobRepository);
+    }
+
+    @Test
+    public void jobSeekersWhenDisplayedShouldBeDisplayedByTheirName() {
+        Writer writer = new StringWriter();
+
+        jobSeeker.display(writer);
+
+        Assert.assertEquals("job seeker", writer.toString());
     }
 }

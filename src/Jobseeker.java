@@ -15,9 +15,11 @@ import java.util.Collection;
 public class JobSeeker {
 
     private Resume resume;
+    private Name name;
 
-    public JobSeeker(Resume resume) {
+    public JobSeeker(Resume resume, Name name) {
         this.resume = resume;
+        this.name = name;
     }
 
     public void save(Job job, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
@@ -39,10 +41,6 @@ public class JobSeeker {
 
 
         applicationRepository.save(application);
-    }
-
-    public String toString() {
-        return resume.toString();
     }
 
     public void displaySavedJobs(Writer writer, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
@@ -71,5 +69,9 @@ public class JobSeeker {
     private Collection<JobSeekerSavedForLaterJob> listSavedJobs(JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobSeekerSavedForLaterJobRepository.find(jobSeekerQuery);
+    }
+
+    public void display(Writer writer) {
+        name.display(writer);
     }
 }
