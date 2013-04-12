@@ -1,5 +1,6 @@
 import org.joda.time.LocalDate;
 
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,5 +47,9 @@ public class Application {
 
     public boolean is(Resume resume) {
         return resume == null || this.resume.equals(resume);
+    }
+
+    public void displayJobSeeker(Writer writer) {
+        jobSeeker.display(writer);
     }
 }
