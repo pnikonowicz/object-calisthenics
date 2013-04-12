@@ -1,3 +1,8 @@
+package collection;
+
+import core.JobSeekerSavedForLaterJob;
+import util.MyWriter;
+
 import java.io.Writer;
 import java.util.Collection;
 

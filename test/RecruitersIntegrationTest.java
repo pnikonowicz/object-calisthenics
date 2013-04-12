@@ -1,15 +1,13 @@
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
+import core.*;
+import data.ApplicationRepository;
+import data.JobRepository;
 import junit.framework.Assert;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Collection;
-import java.util.Date;
 
 import static org.mockito.Mockito.mock;
 

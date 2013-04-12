@@ -1,5 +1,12 @@
+package data;
+
+import collection.Applications;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import core.Application;
+import core.Job;
+import core.Resume;
+import exception.DuplicateResumeException;
 
 import java.util.ArrayList;
 import java.util.Collection;

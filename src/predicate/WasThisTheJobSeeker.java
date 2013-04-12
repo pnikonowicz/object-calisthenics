@@ -1,4 +1,8 @@
+package predicate;
+
 import com.google.common.base.Predicate;
+import core.JobSeeker;
+import core.JobSeekerSavedForLaterJob;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,3 +1,5 @@
+import core.*;
+import data.ApplicationRepository;
 import junit.framework.Assert;
 import org.joda.time.LocalDate;
 import org.junit.Test;

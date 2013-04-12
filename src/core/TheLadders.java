@@ -1,10 +1,15 @@
+package core;
+
+import collection.Applications;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import data.ApplicationRepository;
 import org.joda.time.LocalDate;
+import predicate.WasJobAppliedToOnThisDate;
+import predicate.WasThisJobAppliedTo;
+import predicate.WasThisTheRecruiterForThisApplication;
 
 import java.io.Writer;
-import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.

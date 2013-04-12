@@ -1,4 +1,8 @@
+package predicate;
+
 import com.google.common.base.Predicate;
+import core.Application;
+import core.Job;
 
 /**
  * Created with IntelliJ IDEA.

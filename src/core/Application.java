@@ -1,9 +1,8 @@
+package core;
+
 import org.joda.time.LocalDate;
 
 import java.io.Writer;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,3 +1,7 @@
+package core;
+
+import util.MyWriter;
+
 import java.io.Writer;
 
 /**

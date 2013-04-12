@@ -1,4 +1,7 @@
+package predicate;
+
 import com.google.common.base.Predicate;
+import core.Application;
 import org.joda.time.LocalDate;
 
 import java.util.Date;

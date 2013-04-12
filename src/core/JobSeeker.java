@@ -1,9 +1,14 @@
-import com.google.common.base.Predicate;
-import com.sun.xml.internal.ws.util.StringUtils;
+package core;
 
-import java.io.StringWriter;
+import collection.JobSeekerSavedForLaterJobs;
+import collection.Jobs;
+import com.google.common.base.Predicate;
+import data.ApplicationRepository;
+import data.JobRepository;
+import data.JobSeekerSavedForLaterJobRepository;
+import predicate.WasThisTheJobSeeker;
+
 import java.io.Writer;
-import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.

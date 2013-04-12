@@ -1,9 +1,12 @@
+package data;
+
+import collection.Jobs;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import core.Job;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.

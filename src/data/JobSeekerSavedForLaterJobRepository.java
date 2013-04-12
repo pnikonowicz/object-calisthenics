@@ -1,5 +1,9 @@
+package data;
+
+import collection.JobSeekerSavedForLaterJobs;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import core.JobSeekerSavedForLaterJob;
 
 import java.util.ArrayList;
 import java.util.Collection;

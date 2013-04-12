@@ -1,3 +1,7 @@
+import core.ATS;
+import core.Job;
+import core.Recruiter;
+import core.Title;
 import junit.framework.Assert;
 import org.junit.Test;
 

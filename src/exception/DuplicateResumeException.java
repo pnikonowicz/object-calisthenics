@@ -1,3 +1,5 @@
+package exception;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
