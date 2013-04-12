@@ -45,7 +45,7 @@ public class JobSeekerIntegrationTest {
     @Test
     public void JReqJobsRequireResumeToApplyToThem() {
         Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
-        Job job = new JReq(new Resume(), recruiter);
+        Job job = new JReq(recruiter);
 
         recruiter.post(job);
 
@@ -55,7 +55,7 @@ public class JobSeekerIntegrationTest {
     @Test(expected = DuplicateResumeException.class)
     public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
         Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
-        Job job = new JReq(resume, recruiter);
+        Job job = new JReq(recruiter);
         JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
 
         recruiter.post(job);

@@ -30,7 +30,7 @@ public class JobSeeker {
     public void apply(Job job) {
         Application application = null;
         if(job instanceof JReq) {
-            ((JReq) job).assertUniqueResume(resume);
+            applicationRepository.assertUniqueResume(resume);
             application = ((JReq) job).apply(this, resume);
         }
 

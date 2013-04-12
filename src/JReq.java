@@ -10,12 +10,10 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class JReq implements Job {
-    private final Resume resume;
     private Title title;
     private Recruiter recruiter;
 
-    public JReq(Resume resume, Recruiter recruiter) {
-        this.resume = resume;
+    public JReq(Recruiter recruiter) {
         this.recruiter = recruiter;
     }
 
@@ -25,19 +23,11 @@ public class JReq implements Job {
     }
 
     public Application apply(JobSeeker jobSeeker, Resume resume) {
-        return new Application(LocalDate.now(), this, jobSeeker);
+        return new Application(LocalDate.now(), this, jobSeeker, resume);
     }
 
     @Override
     public boolean is(Recruiter recruiter) {
         return recruiter.equals(this.recruiter);
-    }
-
-    public boolean is(Resume resume) {
-        return this.resume.equals(resume);
-    }
-
-    public void assertUniqueResume(Resume resume) {
-        if(resume.equals(this.resume)) throw new DuplicateResumeException();
     }
 }

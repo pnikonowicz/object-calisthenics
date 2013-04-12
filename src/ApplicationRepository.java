@@ -21,4 +21,10 @@ public class ApplicationRepository {
     public Collection<Application> find(Predicate<Application> query) {
         return Collections2.filter(applications, query);
     }
+
+    public void assertUniqueResume(Resume resume) {
+        for(Application application : applications) {
+            if(application.is(resume)) throw new DuplicateResumeException();
+        }
+    }
 }

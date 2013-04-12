@@ -15,11 +15,17 @@ public class Application {
     private final LocalDate date;
     private final Job job;
     private final JobSeeker jobSeeker;
+    private final Resume resume;
 
     public Application(LocalDate date, Job job, JobSeeker jobSeeker) {
+        this(date, job, jobSeeker, null);
+    }
+
+    public Application(LocalDate date, Job job, JobSeeker jobSeeker, Resume resume) {
         this.date = date;
         this.job = job;
         this.jobSeeker = jobSeeker;
+        this.resume = resume;
     }
 
     public boolean is(Job job) {
@@ -36,5 +42,9 @@ public class Application {
 
     public boolean is(JobSeeker jobSeeker) {
         return this.jobSeeker.equals(jobSeeker);
+    }
+
+    public boolean is(Resume resume) {
+        return resume == null || this.resume.equals(resume);
     }
 }
