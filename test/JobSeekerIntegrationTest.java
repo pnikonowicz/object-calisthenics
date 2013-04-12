@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.StringWriter;
+import java.io.Writer;
 
 import static org.mockito.Mockito.mock;
 
@@ -82,5 +83,18 @@ public class JobSeekerIntegrationTest {
         jobSeeker.displaySavedJobs(stringWriter);
 
         Assert.assertEquals("job A\njob B\n", stringWriter.toString());
+    }
+
+    @Test
+    public void JobSeekersShouldBeAbleToSeeListingOfTheJobsForWhichTheyHaveApplied() {
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Job job_a = new ATS(recruiter, new Title("job A"));
+        Job job_b = new ATS(recruiter, new Title("job B"));
+        Writer stringWriter = new StringWriter();
+
+        jobSeeker.apply(job_a);
+        jobSeeker.apply(job_b);
+
+        jobSeeker.displayAppliedJobs(stringWriter);
     }
 }

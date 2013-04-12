@@ -47,11 +47,6 @@ public class JobSeeker {
         applicationRepository.save(application);
     }
 
-    public Collection<Job> listAppliedJobs() {
-        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
-        return jobRepository.find(jobSeekerQuery);
-    }
-
     public String toString() {
         return resume.toString();
     }
@@ -63,6 +58,20 @@ public class JobSeeker {
             savedJob.displayTitle(writer);
             MyWriter.write(writer, "\n");
         }
+    }
+
+    public void displayAppliedJobs(Writer writer) {
+        Collection<Job> appliedJobs = listAppliedJobs();
+
+        for(Job appliedJob : appliedJobs) {
+            appliedJob.displayTitle(writer);
+            MyWriter.write(writer, "\n");
+        }
+    }
+
+    private Collection<Job> listAppliedJobs() {
+        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
+        return jobRepository.find(jobSeekerQuery);
     }
 
     private Collection<JobSeekerSavedForLaterJob> listSavedJobs() {
