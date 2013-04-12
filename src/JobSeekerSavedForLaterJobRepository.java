@@ -1,4 +1,5 @@
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ public class JobSeekerSavedForLaterJobRepository {
         jobs.add(job);
     }
 
-    public Collection<JobSeeker> find(Predicate query) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+    public Collection<JobSeekerSavedForLaterJob> find(Predicate<JobSeekerSavedForLaterJob> query) {
+        return Collections2.filter(jobs, query);
     }
 }

@@ -18,6 +18,6 @@ public class JobRepository {
     }
 
     public Collection<Job> find(Predicate<Job> query) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return Collections2.filter(allJobs, query);
     }
 }

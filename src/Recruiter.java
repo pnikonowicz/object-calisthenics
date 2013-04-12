@@ -13,12 +13,12 @@ import java.util.Date;
  */
 public class Recruiter {
     private final JobRepository jobRepository;
-    private JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository;
+    private ApplicationRepository applicationRepository;
     private Name name;
 
-    public Recruiter(JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
+    public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository) {
         this.jobRepository = jobRepository;
-        this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
+        this.applicationRepository = applicationRepository;
     }
 
     public void post(Job job) {
@@ -30,11 +30,11 @@ public class Recruiter {
         return jobRepository.find(recruiterQuery);
     }
 
-    public Collection<JobSeeker> whoAppliedToJobOnDate(Job job, Date date) {
+    public Collection<Application> whoAppliedToJobOnDate(Job job, Date date) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
         Predicate query     = Predicates.and(dateQuery, jobQuery);
-        return jobSeekerSavedForLaterJobRepository.find(query);
+        return applicationRepository.find(query);
     }
 
     public String toString() {

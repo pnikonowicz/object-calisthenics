@@ -20,12 +20,12 @@ public class TheLadders {
         this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
     }
 
-    public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
+    public Collection<JobSeekerSavedForLaterJob> whoAppliedToJobOn(Date date) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         return jobSeekerSavedForLaterJobRepository.find(dateQuery);
     }
 
-    public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
+    public Collection<Application> list(Job job, Recruiter recruiter) {
         Predicate jobQuery = new WasThisJobAppliedTo(job);
         Predicate recruiterQuery = new WasThisTheRecruiter(recruiter);
         Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);
