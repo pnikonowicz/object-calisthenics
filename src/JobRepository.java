@@ -19,7 +19,7 @@ public class JobRepository {
         allJobs.add(job);
     }
 
-    public Collection<Job> find(Predicate<Job> query) {
-        return Collections2.filter(allJobs, query);
+    public Jobs find(Predicate<Job> query) {
+        return new Jobs(Collections2.filter(allJobs, query));
     }
 }

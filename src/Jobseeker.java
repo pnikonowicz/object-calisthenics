@@ -50,15 +50,11 @@ public class JobSeeker {
     }
 
     public void displayAppliedJobs(Writer writer, JobRepository jobRepository) {
-        Collection<Job> appliedJobs = listAppliedJobs(jobRepository);
-
-        for(Job appliedJob : appliedJobs) {
-            appliedJob.displayTitle(writer);
-            MyWriter.write(writer, "\n");
-        }
+        Jobs appliedJobs = listAppliedJobs(jobRepository);
+        appliedJobs.displayTitle(writer);
     }
 
-    private Collection<Job> listAppliedJobs(JobRepository jobRepository) {
+    private Jobs listAppliedJobs(JobRepository jobRepository) {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobRepository.find(jobSeekerQuery);
     }

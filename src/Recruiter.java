@@ -35,14 +35,11 @@ public class Recruiter {
     }
 
     public void displayJobsThatIHavePosted(Writer writer, JobRepository jobRepository) {
-        Collection<Job> jobs = listJobsThatIHavePosted(jobRepository);
-        for (Job job : jobs) {
-            job.displayTitle(writer);
-            MyWriter.write(writer, "\n");
-        }
+        Jobs jobs = listJobsThatIHavePosted(jobRepository);
+        jobs.displayTitle(writer);
     }
 
-    private Collection<Job> listJobsThatIHavePosted(JobRepository jobRepository) {
+    private Jobs listJobsThatIHavePosted(JobRepository jobRepository) {
         Predicate<Job> recruiterQuery = new WasThisTheRecruiterForThisJob(this);
         return jobRepository.find(recruiterQuery);
     }
