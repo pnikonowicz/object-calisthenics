@@ -44,15 +44,17 @@ public class RecruitersIntegrationTest {
 
     @Test
     public void shouldBeAbleToSeeAListingOfTheJobsTheyHavePosted() {
-        Job job = mock(Job.class);
+        Job job_A = new ATS(recruiter, new Title("job a"));
+        Job job_B = new ATS(recruiter, new Title("job b"));
+        Writer writer = new StringWriter();
 
-        Mockito.when(job.is(recruiter)).thenReturn(true);
+        recruiter.post(job_A, jobRepository);
+        recruiter.post(job_B, jobRepository);
 
-        recruiter.post(job, jobRepository);
-        Collection<Job> jobsRecruitersPosted = recruiter.listJobsThatIHavePosted(jobRepository);
+        recruiter.displayJobsThatIHavePosted(writer, jobRepository);
 
-        Assert.assertEquals(1, jobsRecruitersPosted.size());
-        Assert.assertTrue(jobsRecruitersPosted.contains(job));
+        Assert.assertEquals("job a\njob b\n", writer.toString());
+
     }
 
     @Test

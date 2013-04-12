@@ -25,11 +25,6 @@ public class Recruiter {
          jobRepository.save(job);
     }
 
-    public Collection<Job> listJobsThatIHavePosted(JobRepository jobRepository) {
-        Predicate<Job> recruiterQuery = new WasThisTheRecruiterForThisJob(this);
-        return jobRepository.find(recruiterQuery);
-    }
-
     public void display(Writer writer) {
         name.display(writer);
     }
@@ -40,6 +35,19 @@ public class Recruiter {
             application.displayJobSeeker(writer);
             MyWriter.write(writer, "\n");
         }
+    }
+
+    public void displayJobsThatIHavePosted(Writer writer, JobRepository jobRepository) {
+        Collection<Job> jobs = listJobsThatIHavePosted(jobRepository);
+        for (Job job : jobs) {
+            job.displayTitle(writer);
+            MyWriter.write(writer, "\n");
+        }
+    }
+
+    private Collection<Job> listJobsThatIHavePosted(JobRepository jobRepository) {
+        Predicate<Job> recruiterQuery = new WasThisTheRecruiterForThisJob(this);
+        return jobRepository.find(recruiterQuery);
     }
 
     private Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
