@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -9,16 +10,33 @@ import org.mockito.Mockito;
  * To change this template use File | Settings | File Templates.
  */
 public class JobSeekerIntegrationTest {
+    private JobSeeker jobSeeker;
+    private JobRepository jobRepository;
+    private ApplicationRepository applicationRepository;
+
+    @Before
+    public void setUp() {
+        Resume resume = new Resume();
+        jobRepository = new JobRepository();
+        JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
+        applicationRepository = new ApplicationRepository();
+        jobSeeker = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
+    }
+
     @Test
     public void JobSeekersCanSaveJobsOnSiteForLaterViewing() {
-        Resume resume = new Resume();
-        JobRepository jobRepository = new JobRepository();
-        JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
-        ApplicationRepository applicationRepository = new ApplicationRepository();
-        JobSeeker jobSeeker = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
         Job job = Mockito.mock(Job.class);
 
         jobSeeker.save(job);
     }
 
+    @Test
+    public void JobSeekersCanApplyToJobsPostedByRecruiters() {
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
+        Job job = new ATS(recruiter);
+
+        recruiter.post(job);
+
+        jobSeeker.apply(job);
+    }
 }
