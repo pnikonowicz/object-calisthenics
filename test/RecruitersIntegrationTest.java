@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Date;
 
@@ -20,13 +21,15 @@ public class RecruitersIntegrationTest {
     Recruiter recruiter;
     private JobRepository jobRepository;
     private ApplicationRepository applicationRepository;
+    private Name name;
 
     @Before
     public void setUp() {
         jobRepository = new JobRepository();
         applicationRepository = new ApplicationRepository();
+        name = new Name("name");
 
-        recruiter = new Recruiter(jobRepository, applicationRepository);
+        recruiter = new Recruiter(jobRepository, applicationRepository, name);
     }
 
     @Test
@@ -68,5 +71,14 @@ public class RecruitersIntegrationTest {
                 return application.is(jobSeeker);
             }
         }).size());
+    }
+
+    @Test
+    public void recruitersShouldBeDisplayedByTheirName() {
+        StringWriter stringWriter = new StringWriter();
+
+        recruiter.display(stringWriter);
+
+        Assert.assertEquals("name", stringWriter.toString());
     }
 }

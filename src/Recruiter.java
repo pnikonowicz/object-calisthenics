@@ -2,6 +2,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.joda.time.LocalDate;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,11 +17,12 @@ import java.util.Date;
 public class Recruiter {
     private final JobRepository jobRepository;
     private final ApplicationRepository applicationRepository;
-    private Name name = new Name();
+    private final Name name;
 
-    public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository) {
+    public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository, Name name) {
         this.jobRepository = jobRepository;
         this.applicationRepository = applicationRepository;
+        this.name = name;
     }
 
     public void post(Job job) {
@@ -38,7 +41,7 @@ public class Recruiter {
         return applicationRepository.find(query);
     }
 
-    public String toString() {
-        return name.toString();
+    public void display(Writer writer) {
+        name.display(writer);
     }
 }
