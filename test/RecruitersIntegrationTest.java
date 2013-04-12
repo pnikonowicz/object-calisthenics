@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
 
@@ -58,20 +59,17 @@ public class RecruitersIntegrationTest {
     public void recruitersShouldBeAbleToSeeJobSeekersWhoHaveAppliedToTheirJobsByBothJobAndDay() {
         Job job = new ATS(recruiter, mock(Title.class));
         LocalDate date = LocalDate.now();
-        final JobSeeker jobSeeker = new JobSeeker(mock(Resume.class), mock(Name.class));
+        final JobSeeker jobSeeker_A = new JobSeeker(mock(Resume.class), new Name("job seeker a"));
+        final JobSeeker jobSeeker_B = new JobSeeker(mock(Resume.class), new Name("job seeker b"));
+        Writer writer = new StringWriter();
 
         recruiter.post(job, jobRepository);
-        jobSeeker.apply(job, applicationRepository, mock(ApplicationNumber.class));
+        jobSeeker_A.apply(job, applicationRepository, mock(ApplicationNumber.class));
+        jobSeeker_B.apply(job, applicationRepository, mock(ApplicationNumber.class));
 
-        Collection<Application> applications = recruiter.whoAppliedToJobOnDate(job, date, applicationRepository);
+        recruiter.displayJobSeekersWhoAppliedToJobOnDate(writer, job, date, applicationRepository);
 
-        Assert.assertEquals(1, applications.size());
-        Assert.assertEquals(1, Collections2.filter(applications, new Predicate<Application>() {
-            @Override
-            public boolean apply(Application application) {
-                return application.is(jobSeeker);
-            }
-        }).size());
+        Assert.assertEquals("job seeker a\njob seeker b\n", writer.toString());
     }
 
     @Test

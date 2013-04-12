@@ -30,14 +30,22 @@ public class Recruiter {
         return jobRepository.find(recruiterQuery);
     }
 
-    public Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
+    public void display(Writer writer) {
+        name.display(writer);
+    }
+
+    public void displayJobSeekersWhoAppliedToJobOnDate(Writer writer, Job job, LocalDate date, ApplicationRepository applicationRepository) {
+        Collection<Application> applications = whoAppliedToJobOnDate(job, date, applicationRepository);
+        for (Application application : applications) {
+            application.displayJobSeeker(writer);
+            MyWriter.write(writer, "\n");
+        }
+    }
+
+    private Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
         Predicate query     = Predicates.and(dateQuery, jobQuery);
         return applicationRepository.find(query);
-    }
-
-    public void display(Writer writer) {
-        name.display(writer);
     }
 }
