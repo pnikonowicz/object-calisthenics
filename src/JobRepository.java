@@ -9,15 +9,10 @@ import java.util.Collection;
  */
 public class JobRepository {
     Collection<Job> allJobs;
-    JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
     ApplicationRepository applicationRepository;
 
     public void save(Job job) {
         allJobs.add(job);
-    }
-
-    public void save(JobSeekerSavedForLaterJob savedJob) {
-        jobSeekerSavedJobsRepository.save(savedJob);
     }
 
     public void save(Application application) {

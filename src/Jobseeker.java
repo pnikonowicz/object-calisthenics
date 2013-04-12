@@ -11,14 +11,16 @@ public class JobSeeker {
 
     private Resume resume;
     private final JobRepository jobRepository;
+    private final JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
 
-    public JobSeeker(Resume resume, JobRepository jobRepository) {
+    public JobSeeker(Resume resume, JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository) {
         this.resume = resume;
         this.jobRepository = jobRepository;
+        this.jobSeekerSavedJobsRepository = jobSeekerSavedJobsRepository;
     }
 
     public void save(Job job) {
-        jobRepository.save(new JobSeekerSavedForLaterJob(this, job));
+        jobSeekerSavedJobsRepository.save(new JobSeekerSavedForLaterJob(this, job));
     }
 
     public void apply(Job job) {
