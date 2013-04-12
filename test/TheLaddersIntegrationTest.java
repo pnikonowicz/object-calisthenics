@@ -51,7 +51,7 @@ public class TheLaddersIntegrationTest {
         jobSeeker_B.apply(job_b, applicationRepository, new ApplicationNumber(2));
         jobSeeker_A.apply(job_b, applicationRepository, new ApplicationNumber(3));
         jobSeeker_B.apply(job_a, applicationRepository, new ApplicationNumber(4));
-        jobSeeker_A.apply(job_c, applicationRepository, new ApplicationNumber(4));
+        jobSeeker_A.apply(job_c, applicationRepository, new ApplicationNumber(5));
 
         theLadders.displayJobApplicationNumbersForThisRecruiterAndJob(writer, job_a, recruiter_A, applicationRepository);
 
