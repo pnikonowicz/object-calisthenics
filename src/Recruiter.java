@@ -15,26 +15,22 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Recruiter {
-    private final JobRepository jobRepository;
-    private final ApplicationRepository applicationRepository;
     private final Name name;
 
-    public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository, Name name) {
-        this.jobRepository = jobRepository;
-        this.applicationRepository = applicationRepository;
+    public Recruiter(Name name) {
         this.name = name;
     }
 
-    public void post(Job job) {
+    public void post(Job job, JobRepository jobRepository) {
          jobRepository.save(job);
     }
 
-    public Collection<Job> listJobsThatIHavePosted() {
+    public Collection<Job> listJobsThatIHavePosted(JobRepository jobRepository) {
         Predicate<Job> recruiterQuery = new WasThisTheRecruiterForThisJob(this);
         return jobRepository.find(recruiterQuery);
     }
 
-    public Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date) {
+    public Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
         Predicate query     = Predicates.and(dateQuery, jobQuery);

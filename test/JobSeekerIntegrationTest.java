@@ -40,31 +40,31 @@ public class JobSeekerIntegrationTest {
 
     @Test
     public void JobSeekersCanApplyToJobsPostedByRecruiters() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job = new ATS(recruiter, mock(Title.class));
 
-        recruiter.post(job);
+        recruiter.post(job, jobRepository);
 
         jobSeeker.apply(job, applicationRepository);
     }
 
     @Test
     public void JReqJobsRequireResumeToApplyToThem() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job = new JReq(recruiter, mock(Title.class));
 
-        recruiter.post(job);
+        recruiter.post(job, jobRepository);
 
         jobSeeker.apply(job, applicationRepository);
     }
 
     @Test(expected = DuplicateResumeException.class)
     public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job = new JReq(recruiter, mock(Title.class));
         JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume);
 
-        recruiter.post(job);
+        recruiter.post(job, jobRepository);
         jobSeeker.apply(job, applicationRepository);
 
         jobSeekerWithSomeoneElsesResume.apply(job, applicationRepository);
@@ -72,7 +72,7 @@ public class JobSeekerIntegrationTest {
 
     @Test
     public void JobSeekersShouldBeAbleToSeeListingOfJobsTheyHaveSavedForLaterViewing() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job_a = new ATS(recruiter, new Title("job A"));
         Job job_b = new ATS(recruiter, new Title("job B"));
         StringWriter stringWriter = new StringWriter();
@@ -87,7 +87,7 @@ public class JobSeekerIntegrationTest {
 
     @Test
     public void JobSeekersShouldBeAbleToSeeListingOfTheJobsForWhichTheyHaveApplied() {
-        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
+        Recruiter recruiter = new Recruiter(mock(Name.class));
         Job job_a = new ATS(recruiter, new Title("job A"));
         Job job_b = new ATS(recruiter, new Title("job B"));
         Writer stringWriter = new StringWriter();

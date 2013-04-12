@@ -31,14 +31,14 @@ public class RecruitersIntegrationTest {
         applicationRepository = new ApplicationRepository();
         name = new Name("name");
 
-        recruiter = new Recruiter(jobRepository, applicationRepository, name);
+        recruiter = new Recruiter(name);
     }
 
     @Test
     public void canPostJobs() {
         Job job = mock(Job.class);
 
-        recruiter.post(job);
+        recruiter.post(job, jobRepository);
     }
 
     @Test
@@ -47,8 +47,8 @@ public class RecruitersIntegrationTest {
 
         Mockito.when(job.is(recruiter)).thenReturn(true);
 
-        recruiter.post(job);
-        Collection<Job> jobsRecruitersPosted = recruiter.listJobsThatIHavePosted();
+        recruiter.post(job, jobRepository);
+        Collection<Job> jobsRecruitersPosted = recruiter.listJobsThatIHavePosted(jobRepository);
 
         Assert.assertEquals(1, jobsRecruitersPosted.size());
         Assert.assertTrue(jobsRecruitersPosted.contains(job));
@@ -60,10 +60,10 @@ public class RecruitersIntegrationTest {
         LocalDate date = LocalDate.now();
         final JobSeeker jobSeeker = new JobSeeker(new Resume());
 
-        recruiter.post(job);
+        recruiter.post(job, jobRepository);
         jobSeeker.apply(job, applicationRepository);
 
-        Collection<Application> applications = recruiter.whoAppliedToJobOnDate(job, date);
+        Collection<Application> applications = recruiter.whoAppliedToJobOnDate(job, date, applicationRepository);
 
         Assert.assertEquals(1, applications.size());
         Assert.assertEquals(1, Collections2.filter(applications, new Predicate<Application>() {
