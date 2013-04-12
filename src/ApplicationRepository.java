@@ -1,3 +1,5 @@
+import com.google.common.base.Predicate;
+
 import java.util.Collection;
 
 /**
@@ -14,7 +16,7 @@ public class ApplicationRepository {
         applications.add(application);
     }
 
-    public Collection<ApplicationNumber> find(Query query) {
+    public Collection<ApplicationNumber> find(Predicate query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }

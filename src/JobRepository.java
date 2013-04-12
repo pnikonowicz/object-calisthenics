@@ -17,7 +17,7 @@ public class JobRepository {
         allJobs.add(job);
     }
 
-    public Collection<Job> find(Query<Job> query) {
+    public Collection<Job> find(Predicate<Job> query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }

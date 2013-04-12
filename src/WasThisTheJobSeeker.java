@@ -1,3 +1,5 @@
+import com.google.common.base.Predicate;
+
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
@@ -5,7 +7,7 @@
  * Time: 5:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WasThisTheJobSeeker implements Query<JobSeekerSavedForLaterJob> {
+public class WasThisTheJobSeeker implements Predicate<JobSeekerSavedForLaterJob> {
     private JobSeeker jobSeeker;
 
     public WasThisTheJobSeeker(JobSeeker jobSeeker) {
@@ -13,7 +15,7 @@ public class WasThisTheJobSeeker implements Query<JobSeekerSavedForLaterJob> {
     }
 
     @Override
-    public boolean assertTrue(JobSeekerSavedForLaterJob jobSeekerSavedForLaterJob) {
+    public boolean apply(JobSeekerSavedForLaterJob jobSeekerSavedForLaterJob) {
         return jobSeekerSavedForLaterJob.is(jobSeeker);
     }
 }

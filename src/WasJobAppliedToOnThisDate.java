@@ -1,3 +1,5 @@
+import com.google.common.base.Predicate;
+
 import java.util.Date;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Date;
  * Time: 3:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WasJobAppliedToOnThisDate implements Query<Application> {
+public class WasJobAppliedToOnThisDate implements Predicate<Application> {
     private Date date;
 
     public WasJobAppliedToOnThisDate(Date date) {
@@ -15,7 +17,7 @@ public class WasJobAppliedToOnThisDate implements Query<Application> {
     }
 
     @Override
-    public boolean assertTrue(Application application) {
+    public boolean apply(Application application) {
         return application.is(date);
     }
 }

@@ -1,3 +1,5 @@
+import com.google.common.base.Predicate;
+
 import java.util.Collection;
 
 /**
@@ -41,12 +43,12 @@ public class JobSeeker {
     }
 
     public Collection<Job> listSavedJobs() {
-        Query jobSeekerQuery = new WasThisTheJobSeeker(this);
+        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobRepository.find(jobSeekerQuery);
     }
 
     public Collection<Job> listAppliedJobs() {
-        Query jobSeekerQuery = new WasThisTheJobSeeker(this);
+        Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobRepository.find(jobSeekerQuery);
     }
 

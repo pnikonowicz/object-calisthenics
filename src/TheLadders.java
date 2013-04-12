@@ -1,3 +1,5 @@
+import com.google.common.base.Predicate;
+
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,14 +20,14 @@ public class TheLadders {
     }
 
     public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
-        Query dateQuery = new WasJobAppliedToOnThisDate(date);
+        Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         return jobSeekerSavedForLaterJobRepository.find(dateQuery);
     }
 
     public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
-        Query jobQuery = new WasThisJobAppliedTo(job);
-        Query recruiterQuery = new WasThisTheRecruiter(recruiter);
-        Query conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
+        Predicate jobQuery = new WasThisJobAppliedTo(job);
+        Predicate recruiterQuery = new WasThisTheRecruiter(recruiter);
+        Predicate conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
         return applicationRepository.find(conjunctionQuery);
     }
 }
