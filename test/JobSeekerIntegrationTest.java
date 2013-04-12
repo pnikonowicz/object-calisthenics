@@ -20,22 +20,22 @@ public class JobSeekerIntegrationTest {
     private JobRepository jobRepository;
     private ApplicationRepository applicationRepository;
     private Resume resume;
-    private JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
+    private JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository;
 
     @Before
     public void setUp() {
         resume = new Resume();
         jobRepository = new JobRepository();
-        jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
+        jobSeekerSavedForLaterJobRepository = new JobSeekerSavedForLaterJobRepository();
         applicationRepository = new ApplicationRepository();
-        jobSeeker = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
+        jobSeeker = new JobSeeker(resume);
     }
 
     @Test
     public void JobSeekersCanSaveJobsOnSiteForLaterViewing() {
         Job job = mock(Job.class);
 
-        jobSeeker.save(job);
+        jobSeeker.save(job, jobSeekerSavedForLaterJobRepository);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class JobSeekerIntegrationTest {
 
         recruiter.post(job);
 
-        jobSeeker.apply(job);
+        jobSeeker.apply(job, applicationRepository);
     }
 
     @Test
@@ -55,19 +55,19 @@ public class JobSeekerIntegrationTest {
 
         recruiter.post(job);
 
-        jobSeeker.apply(job);
+        jobSeeker.apply(job, applicationRepository);
     }
 
     @Test(expected = DuplicateResumeException.class)
     public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
         Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, mock(Name.class));
         Job job = new JReq(recruiter, mock(Title.class));
-        JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
+        JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume);
 
         recruiter.post(job);
-        jobSeeker.apply(job);
+        jobSeeker.apply(job, applicationRepository);
 
-        jobSeekerWithSomeoneElsesResume.apply(job);
+        jobSeekerWithSomeoneElsesResume.apply(job, applicationRepository);
     }
 
     @Test
@@ -77,10 +77,10 @@ public class JobSeekerIntegrationTest {
         Job job_b = new ATS(recruiter, new Title("job B"));
         StringWriter stringWriter = new StringWriter();
 
-        jobSeeker.save(job_a);
-        jobSeeker.save(job_b);
+        jobSeeker.save(job_a, jobSeekerSavedForLaterJobRepository);
+        jobSeeker.save(job_b, jobSeekerSavedForLaterJobRepository);
 
-        jobSeeker.displaySavedJobs(stringWriter);
+        jobSeeker.displaySavedJobs(stringWriter, jobSeekerSavedForLaterJobRepository);
 
         Assert.assertEquals("job A\njob B\n", stringWriter.toString());
     }
@@ -92,9 +92,9 @@ public class JobSeekerIntegrationTest {
         Job job_b = new ATS(recruiter, new Title("job B"));
         Writer stringWriter = new StringWriter();
 
-        jobSeeker.apply(job_a);
-        jobSeeker.apply(job_b);
+        jobSeeker.apply(job_a, applicationRepository);
+        jobSeeker.apply(job_b, applicationRepository);
 
-        jobSeeker.displayAppliedJobs(stringWriter);
+        jobSeeker.displayAppliedJobs(stringWriter, jobRepository);
     }
 }

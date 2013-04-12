@@ -15,22 +15,16 @@ import java.util.Collection;
 public class JobSeeker {
 
     private Resume resume;
-    private final JobRepository jobRepository;
-    private final JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
-    private final ApplicationRepository applicationRepository;
 
-    public JobSeeker(Resume resume, JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository, ApplicationRepository applicationRepository) {
+    public JobSeeker(Resume resume) {
         this.resume = resume;
-        this.jobRepository = jobRepository;
-        this.jobSeekerSavedJobsRepository = jobSeekerSavedJobsRepository;
-        this.applicationRepository = applicationRepository;
     }
 
-    public void save(Job job) {
-        jobSeekerSavedJobsRepository.save(new JobSeekerSavedForLaterJob(this, job));
+    public void save(Job job, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
+        jobSeekerSavedForLaterJobRepository.save(new JobSeekerSavedForLaterJob(this, job));
     }
 
-    public void apply(Job job) {
+    public void apply(Job job, ApplicationRepository applicationRepository) {
         Application application = null;
         if(job instanceof JReq) {
             applicationRepository.assertUniqueResume(resume);
@@ -51,8 +45,8 @@ public class JobSeeker {
         return resume.toString();
     }
 
-    public void displaySavedJobs(Writer writer) {
-        Collection<JobSeekerSavedForLaterJob> savedJobs = listSavedJobs();
+    public void displaySavedJobs(Writer writer, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
+        Collection<JobSeekerSavedForLaterJob> savedJobs = listSavedJobs(jobSeekerSavedForLaterJobRepository);
 
         for(JobSeekerSavedForLaterJob savedJob : savedJobs) {
             savedJob.displayTitle(writer);
@@ -60,8 +54,8 @@ public class JobSeeker {
         }
     }
 
-    public void displayAppliedJobs(Writer writer) {
-        Collection<Job> appliedJobs = listAppliedJobs();
+    public void displayAppliedJobs(Writer writer, JobRepository jobRepository) {
+        Collection<Job> appliedJobs = listAppliedJobs(jobRepository);
 
         for(Job appliedJob : appliedJobs) {
             appliedJob.displayTitle(writer);
@@ -69,13 +63,13 @@ public class JobSeeker {
         }
     }
 
-    private Collection<Job> listAppliedJobs() {
+    private Collection<Job> listAppliedJobs(JobRepository jobRepository) {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobRepository.find(jobSeekerQuery);
     }
 
-    private Collection<JobSeekerSavedForLaterJob> listSavedJobs() {
+    private Collection<JobSeekerSavedForLaterJob> listSavedJobs(JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
-        return jobSeekerSavedJobsRepository.find(jobSeekerQuery);
+        return jobSeekerSavedForLaterJobRepository.find(jobSeekerQuery);
     }
 }
