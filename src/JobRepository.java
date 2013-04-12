@@ -1,3 +1,6 @@
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+
 import java.util.Collection;
 
 /**
@@ -14,7 +17,7 @@ public class JobRepository {
         allJobs.add(job);
     }
 
-    public Collection<Job> find(Query query) {
+    public Collection<Job> find(Query<Job> query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }
