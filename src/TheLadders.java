@@ -9,11 +9,11 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TheLadders {
-    private final JobRepository jobRepository;
     private final JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository;
+    private final ApplicationRepository applicationRepository;
 
-    public TheLadders(JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
-        this.jobRepository = jobRepository;
+    public TheLadders(ApplicationRepository applicationRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
+        this.applicationRepository = applicationRepository;
         this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
     }
 
@@ -26,6 +26,6 @@ public class TheLadders {
         Query jobQuery = new WasThisJobAppliedTo(job);
         Query recruiterQuery = new WasThisTheRecruiter(recruiter);
         Query conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
-        return jobRepository.findApplicationNumbers(conjunctionQuery);
+        return applicationRepository.find(conjunctionQuery);
     }
 }
