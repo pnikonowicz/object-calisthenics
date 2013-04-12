@@ -15,29 +15,21 @@ import java.util.Date;
  */
 public class TheLadders {
     public void displayJobSeekersWhoHaveAppliedToJobsOn(Writer writer, LocalDate date, ApplicationRepository applicationRepository) {
-        Collection<Application> applications = whoAppliedToJobOn(date, applicationRepository);
-
-        for(Application application : applications) {
-            application.displayJobSeeker(writer);
-            MyWriter.write(writer, "\n");
-        }
+        Applications applications = whoAppliedToJobOn(date, applicationRepository);
+        applications.displayJobSeekers(writer);
     }
 
     public void displayJobApplicationNumbersForThisRecruiterAndJob(Writer writer, Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
-        Collection<Application> applications = listJobApplicationNumbersForThisRecruiterAndJob(job, recruiter, applicationRepository);
-
-        for(Application application : applications) {
-            application.displayApplicationNumber(writer);
-            MyWriter.write(writer, "\n");
-        }
+        Applications applications = listJobApplicationNumbersForThisRecruiterAndJob(job, recruiter, applicationRepository);
+        applications.displayApplicationNumbers(writer);
     }
 
-    private Collection<Application> whoAppliedToJobOn(LocalDate date, ApplicationRepository applicationRepository) {
+    private Applications whoAppliedToJobOn(LocalDate date, ApplicationRepository applicationRepository) {
         Predicate<Application> dateQuery = new WasJobAppliedToOnThisDate(date);
         return applicationRepository.find(dateQuery);
     }
 
-    private Collection<Application> listJobApplicationNumbersForThisRecruiterAndJob(Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
+    private Applications listJobApplicationNumbersForThisRecruiterAndJob(Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
         Predicate jobQuery = new WasThisJobAppliedTo(job);
         Predicate recruiterQuery = new WasThisTheRecruiterForThisApplication(recruiter);
         Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);

@@ -18,8 +18,8 @@ public class ApplicationRepository {
         applications.add(application);
     }
 
-    public Collection<Application> find(Predicate<Application> query) {
-        return Collections2.filter(applications, query);
+    public Applications find(Predicate<Application> query) {
+        return new Applications(Collections2.filter(applications, query));
     }
 
     public void assertUniqueResume(Job job, Resume resume) {

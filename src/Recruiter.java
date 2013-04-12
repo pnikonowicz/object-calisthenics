@@ -30,11 +30,8 @@ public class Recruiter {
     }
 
     public void displayJobSeekersWhoAppliedToJobOnDate(Writer writer, Job job, LocalDate date, ApplicationRepository applicationRepository) {
-        Collection<Application> applications = whoAppliedToJobOnDate(job, date, applicationRepository);
-        for (Application application : applications) {
-            application.displayJobSeeker(writer);
-            MyWriter.write(writer, "\n");
-        }
+        Applications applications = whoAppliedToJobOnDate(job, date, applicationRepository);
+        applications.displayJobSeekers(writer);
     }
 
     public void displayJobsThatIHavePosted(Writer writer, JobRepository jobRepository) {
@@ -50,7 +47,7 @@ public class Recruiter {
         return jobRepository.find(recruiterQuery);
     }
 
-    private Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
+    private Applications whoAppliedToJobOnDate(Job job, LocalDate date, ApplicationRepository applicationRepository) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
         Predicate query     = Predicates.and(dateQuery, jobQuery);
