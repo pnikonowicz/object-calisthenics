@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Recruiter {
     private final JobRepository jobRepository;
-    private ApplicationRepository applicationRepository;
+    private final ApplicationRepository applicationRepository;
     private Name name;
 
     public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository) {

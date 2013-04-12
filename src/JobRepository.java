@@ -1,7 +1,9 @@
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +13,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class JobRepository {
-    Collection<Job> allJobs;
+    private final Collection<Job> allJobs = new ArrayList<Job>();
 
     public void save(Job job) {
         allJobs.add(job);
