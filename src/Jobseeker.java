@@ -12,11 +12,13 @@ public class JobSeeker {
     private Resume resume;
     private final JobRepository jobRepository;
     private final JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
+    private final ApplicationRepository applicationRepository;
 
-    public JobSeeker(Resume resume, JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository) {
+    public JobSeeker(Resume resume, JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository, ApplicationRepository applicationRepository) {
         this.resume = resume;
         this.jobRepository = jobRepository;
         this.jobSeekerSavedJobsRepository = jobSeekerSavedJobsRepository;
+        this.applicationRepository = applicationRepository;
     }
 
     public void save(Job job) {
@@ -35,7 +37,7 @@ public class JobSeeker {
 
         if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);
 
-        jobRepository.save(application);
+        applicationRepository.save(application);
     }
 
     public Collection<Job> listSavedJobs() {

@@ -9,14 +9,9 @@ import java.util.Collection;
  */
 public class JobRepository {
     Collection<Job> allJobs;
-    ApplicationRepository applicationRepository;
 
     public void save(Job job) {
         allJobs.add(job);
-    }
-
-    public void save(Application application) {
-        applicationRepository.save(application);
     }
 
     public Collection<Job> find(Query query) {
