@@ -39,4 +39,14 @@ public class JobSeekerIntegrationTest {
 
         jobSeeker.apply(job);
     }
+
+    @Test
+    public void JReqJobsRequireResumeToApplyToThem() {
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
+        Job job = new JReq(new Resume(), recruiter);
+
+        recruiter.post(job);
+
+        jobSeeker.apply(job);
+    }
 }
