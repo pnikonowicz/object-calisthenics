@@ -1,5 +1,6 @@
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import org.joda.time.LocalDate;
 
 import java.util.Collection;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class TheLadders {
         this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
     }
 
-    public Collection<JobSeekerSavedForLaterJob> whoAppliedToJobOn(Date date) {
+    public Collection<JobSeekerSavedForLaterJob> whoAppliedToJobOn(LocalDate date) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         return jobSeekerSavedForLaterJobRepository.find(dateQuery);
     }

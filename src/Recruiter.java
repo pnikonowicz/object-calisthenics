@@ -1,5 +1,6 @@
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import org.joda.time.LocalDate;
 
 import java.util.Collection;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class Recruiter {
     private final JobRepository jobRepository;
     private final ApplicationRepository applicationRepository;
-    private Name name;
+    private Name name = new Name();
 
     public Recruiter(JobRepository jobRepository, ApplicationRepository applicationRepository) {
         this.jobRepository = jobRepository;
@@ -30,7 +31,7 @@ public class Recruiter {
         return jobRepository.find(recruiterQuery);
     }
 
-    public Collection<Application> whoAppliedToJobOnDate(Job job, Date date) {
+    public Collection<Application> whoAppliedToJobOnDate(Job job, LocalDate date) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
         Predicate query     = Predicates.and(dateQuery, jobQuery);

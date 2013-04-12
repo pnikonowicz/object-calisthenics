@@ -30,11 +30,11 @@ public class JobSeeker {
     public void apply(Job job) {
         Application application = null;
         if(job instanceof JReq) {
-             application = ((JReq) job).apply(resume);
+             application = ((JReq) job).apply(this, resume);
         }
 
         if(job instanceof ATS) {
-            application = ((ATS)job).apply();
+            application = ((ATS)job).apply(this);
         }
 
         if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);

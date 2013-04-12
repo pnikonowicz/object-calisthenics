@@ -1,6 +1,7 @@
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class ApplicationRepository {
-    Collection<Application> applications;
+    Collection<Application> applications = new ArrayList<Application>();
 
     public void save(Application application) {
         applications.add(application);

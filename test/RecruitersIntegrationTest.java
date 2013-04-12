@@ -1,9 +1,13 @@
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import junit.framework.Assert;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,32 +17,56 @@ import java.util.Collection;
  * To change this template use File | Settings | File Templates.
  */
 public class RecruitersIntegrationTest {
-    Recruiter testedObject;
+    Recruiter recruiter;
+    private JobRepository jobRepository;
+    private ApplicationRepository applicationRepository;
 
     @Before
     public void setUp() {
-        JobRepository jobRepository = new JobRepository();
-        ApplicationRepository applicationRepository = new ApplicationRepository();
-        testedObject = new Recruiter(jobRepository, applicationRepository);
+        jobRepository = new JobRepository();
+        applicationRepository = new ApplicationRepository();
+
+        recruiter = new Recruiter(jobRepository, applicationRepository);
     }
 
     @Test
     public void canPostJobs() {
         Job job = Mockito.mock(Job.class);
 
-        testedObject.post(job);
+        recruiter.post(job);
     }
 
     @Test
     public void shouldBeAbleToSeeAListingOfTheJobsTheyHavePosted() {
         Job job = Mockito.mock(Job.class);
 
-        Mockito.when(job.is(testedObject)).thenReturn(true);
+        Mockito.when(job.is(recruiter)).thenReturn(true);
 
-        testedObject.post(job);
-        Collection<Job> jobsRecruitersPosted = testedObject.listJobsThatIHavePosted();
+        recruiter.post(job);
+        Collection<Job> jobsRecruitersPosted = recruiter.listJobsThatIHavePosted();
 
         Assert.assertEquals(1, jobsRecruitersPosted.size());
         Assert.assertTrue(jobsRecruitersPosted.contains(job));
+    }
+
+    @Test
+    public void recruitersShouldBeAbleToSeeJobSeekersWhoHaveAppliedToTheirJobsByBothJobAndDay() {
+        Job job = new ATS(recruiter);
+        LocalDate date = LocalDate.now();
+        JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
+        final JobSeeker jobSeeker = new JobSeeker(new Resume(), jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
+
+        recruiter.post(job);
+        jobSeeker.apply(job);
+
+        Collection<Application> applications = recruiter.whoAppliedToJobOnDate(job, date);
+
+        Assert.assertEquals(1, applications.size());
+        Assert.assertEquals(1, Collections2.filter(applications, new Predicate<Application>() {
+            @Override
+            public boolean apply(Application application) {
+                return application.is(jobSeeker);
+            }
+        }).size());
     }
 }

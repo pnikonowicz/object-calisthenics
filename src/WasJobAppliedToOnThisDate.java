@@ -1,4 +1,5 @@
 import com.google.common.base.Predicate;
+import org.joda.time.LocalDate;
 
 import java.util.Date;
 
@@ -10,9 +11,9 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class WasJobAppliedToOnThisDate implements Predicate<Application> {
-    private Date date;
+    private LocalDate date;
 
-    public WasJobAppliedToOnThisDate(Date date) {
+    public WasJobAppliedToOnThisDate(LocalDate date) {
         this.date = date;
     }
 

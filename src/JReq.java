@@ -1,3 +1,5 @@
+import org.joda.time.LocalDate;
+
 import java.util.Date;
 
 /**
@@ -22,8 +24,8 @@ public class JReq implements Job {
         return title.toString();
     }
 
-    public Application apply(Resume resume) {
-        return new Application(new Date(), this);
+    public Application apply(JobSeeker jobSeeker, Resume resume) {
+        return new Application(LocalDate.now(), this, jobSeeker);
     }
 
     @Override

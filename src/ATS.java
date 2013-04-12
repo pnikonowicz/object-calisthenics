@@ -1,3 +1,5 @@
+import org.joda.time.LocalDate;
+
 import java.util.Date;
 
 /**
@@ -15,8 +17,8 @@ public class ATS implements Job  {
         this.recruiter = recruiter;
     }
 
-    public Application apply() {
-        return new Application(new Date(), this);
+    public Application apply(JobSeeker jobSeeker) {
+        return new Application(LocalDate.now(), this, jobSeeker);
     }
 
     @Override
