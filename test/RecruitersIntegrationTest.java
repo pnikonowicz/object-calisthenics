@@ -58,10 +58,10 @@ public class RecruitersIntegrationTest {
     public void recruitersShouldBeAbleToSeeJobSeekersWhoHaveAppliedToTheirJobsByBothJobAndDay() {
         Job job = new ATS(recruiter, mock(Title.class));
         LocalDate date = LocalDate.now();
-        final JobSeeker jobSeeker = new JobSeeker(new Resume(), mock(Name.class));
+        final JobSeeker jobSeeker = new JobSeeker(mock(Resume.class), mock(Name.class));
 
         recruiter.post(job, jobRepository);
-        jobSeeker.apply(job, applicationRepository);
+        jobSeeker.apply(job, applicationRepository, mock(ApplicationNumber.class));
 
         Collection<Application> applications = recruiter.whoAppliedToJobOnDate(job, date, applicationRepository);
 

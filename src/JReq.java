@@ -24,8 +24,8 @@ public class JReq implements Job {
         return title.toString();
     }
 
-    public Application apply(JobSeeker jobSeeker, Resume resume) {
-        return new Application(LocalDate.now(), this, jobSeeker, resume);
+    public Application apply(JobSeeker jobSeeker, ApplicationNumber applicationNumber, Resume resume) {
+        return new Application(LocalDate.now(), this, jobSeeker, applicationNumber, resume);
     }
 
     @Override

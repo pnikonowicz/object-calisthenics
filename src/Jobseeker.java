@@ -26,15 +26,15 @@ public class JobSeeker {
         jobSeekerSavedForLaterJobRepository.save(new JobSeekerSavedForLaterJob(this, job));
     }
 
-    public void apply(Job job, ApplicationRepository applicationRepository) {
+    public void apply(Job job, ApplicationRepository applicationRepository, ApplicationNumber applicationNumber) {
         Application application = null;
         if(job instanceof JReq) {
-            applicationRepository.assertUniqueResume(resume);
-            application = ((JReq) job).apply(this, resume);
+            applicationRepository.assertUniqueResume(job, resume);
+            application = ((JReq) job).apply(this, applicationNumber, resume);
         }
 
         if(job instanceof ATS) {
-            application = ((ATS)job).apply(this);
+            application = ((ATS)job).apply(this, applicationNumber);
         }
 
         if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);

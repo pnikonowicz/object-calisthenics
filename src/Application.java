@@ -17,16 +17,18 @@ public class Application {
     private final Job job;
     private final JobSeeker jobSeeker;
     private final Resume resume;
+    private final ApplicationNumber applicationNumber;
 
-    public Application(LocalDate date, Job job, JobSeeker jobSeeker) {
-        this(date, job, jobSeeker, null);
+    public Application(LocalDate date, Job job, JobSeeker jobSeeker, ApplicationNumber applicationNumber) {
+        this(date, job, jobSeeker, applicationNumber, null);
     }
 
-    public Application(LocalDate date, Job job, JobSeeker jobSeeker, Resume resume) {
+    public Application(LocalDate date, Job job, JobSeeker jobSeeker, ApplicationNumber applicationNumber, Resume resume) {
         this.date = date;
         this.job = job;
         this.jobSeeker = jobSeeker;
         this.resume = resume;
+        this.applicationNumber = applicationNumber;
     }
 
     public boolean is(Job job) {
@@ -51,5 +53,9 @@ public class Application {
 
     public void displayJobSeeker(Writer writer) {
         jobSeeker.display(writer);
+    }
+
+    public void displayApplicationNumber(Writer writer) {
+        applicationNumber.display(writer);
     }
 }

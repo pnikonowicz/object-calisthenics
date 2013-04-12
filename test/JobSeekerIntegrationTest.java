@@ -24,7 +24,7 @@ public class JobSeekerIntegrationTest {
 
     @Before
     public void setUp() {
-        resume = new Resume();
+        resume = mock(Resume.class);
         jobRepository = new JobRepository();
         jobSeekerSavedForLaterJobRepository = new JobSeekerSavedForLaterJobRepository();
         applicationRepository = new ApplicationRepository();
@@ -45,7 +45,7 @@ public class JobSeekerIntegrationTest {
 
         recruiter.post(job, jobRepository);
 
-        jobSeeker.apply(job, applicationRepository);
+        jobSeeker.apply(job, applicationRepository, mock(ApplicationNumber.class));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class JobSeekerIntegrationTest {
 
         recruiter.post(job, jobRepository);
 
-        jobSeeker.apply(job, applicationRepository);
+        jobSeeker.apply(job, applicationRepository, mock(ApplicationNumber.class));
     }
 
     @Test(expected = DuplicateResumeException.class)
@@ -65,9 +65,9 @@ public class JobSeekerIntegrationTest {
         JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, mock(Name.class));
 
         recruiter.post(job, jobRepository);
-        jobSeeker.apply(job, applicationRepository);
+        jobSeeker.apply(job, applicationRepository, mock(ApplicationNumber.class));
 
-        jobSeekerWithSomeoneElsesResume.apply(job, applicationRepository);
+        jobSeekerWithSomeoneElsesResume.apply(job, applicationRepository, mock(ApplicationNumber.class));
     }
 
     @Test
@@ -92,8 +92,8 @@ public class JobSeekerIntegrationTest {
         Job job_b = new ATS(recruiter, new Title("job B"));
         Writer stringWriter = new StringWriter();
 
-        jobSeeker.apply(job_a, applicationRepository);
-        jobSeeker.apply(job_b, applicationRepository);
+        jobSeeker.apply(job_a, applicationRepository, mock(ApplicationNumber.class));
+        jobSeeker.apply(job_b, applicationRepository, mock(ApplicationNumber.class));
 
         jobSeeker.displayAppliedJobs(stringWriter, jobRepository);
     }

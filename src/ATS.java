@@ -19,8 +19,8 @@ public class ATS implements Job  {
         this.title = title;
     }
 
-    public Application apply(JobSeeker jobSeeker) {
-        return new Application(LocalDate.now(), this, jobSeeker);
+    public Application apply(JobSeeker jobSeeker, ApplicationNumber applicationNumber) {
+        return new Application(LocalDate.now(), this, jobSeeker, applicationNumber);
     }
 
     @Override

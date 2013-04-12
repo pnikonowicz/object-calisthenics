@@ -22,9 +22,9 @@ public class ApplicationRepository {
         return Collections2.filter(applications, query);
     }
 
-    public void assertUniqueResume(Resume resume) {
+    public void assertUniqueResume(Job job, Resume resume) {
         for(Application application : applications) {
-            if(application.is(resume)) throw new DuplicateResumeException();
+            if(application.is(resume) && application.is(job)) throw new DuplicateResumeException();
         }
     }
 }

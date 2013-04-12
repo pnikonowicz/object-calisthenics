@@ -14,18 +14,6 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TheLadders {
-    public Collection<Application> whoAppliedToJobOn(LocalDate date, ApplicationRepository applicationRepository) {
-        Predicate<Application> dateQuery = new WasJobAppliedToOnThisDate(date);
-        return applicationRepository.find(dateQuery);
-    }
-
-    public Collection<Application> list(Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
-        Predicate jobQuery = new WasThisJobAppliedTo(job);
-        Predicate recruiterQuery = new WasThisTheRecruiterForThisApplication(recruiter);
-        Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);
-        return applicationRepository.find(conjunctionQuery);
-    }
-
     public void displayJobSeekersWhoHaveAppliedToJobsOn(Writer writer, LocalDate date, ApplicationRepository applicationRepository) {
         Collection<Application> applications = whoAppliedToJobOn(date, applicationRepository);
 
@@ -33,5 +21,26 @@ public class TheLadders {
             application.displayJobSeeker(writer);
             MyWriter.write(writer, "\n");
         }
+    }
+
+    public void displayJobApplicationNumbersForThisRecruiterAndJob(Writer writer, Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
+        Collection<Application> applications = listJobApplicationNumbersForThisRecruiterAndJob(job, recruiter, applicationRepository);
+
+        for(Application application : applications) {
+            application.displayApplicationNumber(writer);
+            MyWriter.write(writer, "\n");
+        }
+    }
+
+    private Collection<Application> whoAppliedToJobOn(LocalDate date, ApplicationRepository applicationRepository) {
+        Predicate<Application> dateQuery = new WasJobAppliedToOnThisDate(date);
+        return applicationRepository.find(dateQuery);
+    }
+
+    private Collection<Application> listJobApplicationNumbersForThisRecruiterAndJob(Job job, Recruiter recruiter, ApplicationRepository applicationRepository) {
+        Predicate jobQuery = new WasThisJobAppliedTo(job);
+        Predicate recruiterQuery = new WasThisTheRecruiterForThisApplication(recruiter);
+        Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);
+        return applicationRepository.find(conjunctionQuery);
     }
 }

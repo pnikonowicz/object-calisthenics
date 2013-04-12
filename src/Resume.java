@@ -7,8 +7,8 @@
  */
 public class Resume {
     private Name name;
-    public String toString() {
-        return name.toString();
-    }
 
+    public Resume(Name name) {
+        this.name = name;
+    }
 }
