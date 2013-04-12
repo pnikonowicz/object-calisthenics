@@ -44,12 +44,9 @@ public class JobSeeker {
     }
 
     public void displaySavedJobs(Writer writer, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
-        Collection<JobSeekerSavedForLaterJob> savedJobs = listSavedJobs(jobSeekerSavedForLaterJobRepository);
+        JobSeekerSavedForLaterJobs savedJobs = listSavedJobs(jobSeekerSavedForLaterJobRepository);
+        savedJobs.displayTitle(writer);
 
-        for(JobSeekerSavedForLaterJob savedJob : savedJobs) {
-            savedJob.displayTitle(writer);
-            MyWriter.write(writer, "\n");
-        }
     }
 
     public void displayAppliedJobs(Writer writer, JobRepository jobRepository) {
@@ -66,7 +63,7 @@ public class JobSeeker {
         return jobRepository.find(jobSeekerQuery);
     }
 
-    private Collection<JobSeekerSavedForLaterJob> listSavedJobs(JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
+    private JobSeekerSavedForLaterJobs listSavedJobs(JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
         Predicate jobSeekerQuery = new WasThisTheJobSeeker(this);
         return jobSeekerSavedForLaterJobRepository.find(jobSeekerQuery);
     }

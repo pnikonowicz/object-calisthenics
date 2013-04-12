@@ -18,7 +18,7 @@ public class JobSeekerSavedForLaterJobRepository {
         jobs.add(job);
     }
 
-    public Collection<JobSeekerSavedForLaterJob> find(Predicate<JobSeekerSavedForLaterJob> query) {
-        return Collections2.filter(jobs, query);
+    public JobSeekerSavedForLaterJobs find(Predicate<JobSeekerSavedForLaterJob> query) {
+        return new JobSeekerSavedForLaterJobs(Collections2.filter(jobs, query));
     }
 }
