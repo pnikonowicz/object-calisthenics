@@ -21,8 +21,8 @@ public class TheLaddersIntegrationTest {
         JobSeeker jobSeeker_A = new JobSeeker(mock(Resume.class), new Name("job seeker a"));
         JobSeeker jobSeeker_B = new JobSeeker(mock(Resume.class), new Name("job seeker b"));
         Recruiter recruiter = new Recruiter(new Name("recruiter"));
-        Job job_a = new JReq(recruiter, new Title("job a"));
-        Job job_b = new JReq(recruiter, new Title("job b"));
+        Job job_a = new JReq(recruiter, mock(Title.class));
+        Job job_b = new JReq(recruiter, mock(Title.class));
         TheLadders theLadders = new TheLadders();
         Writer writer = new StringWriter();
 
