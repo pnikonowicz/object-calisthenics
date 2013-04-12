@@ -24,7 +24,7 @@ public class Recruiter {
 
     public Collection<Job> list() {
         Query recruiterQuery = new WasThisTheRecruiter(this);
-        return jobRepository.findJobs(recruiterQuery);
+        return jobRepository.find(recruiterQuery);
     }
 
     public Collection<JobSeeker> whoAppliedToJobOnDate(Job job, Date date) {

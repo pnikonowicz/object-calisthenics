@@ -24,7 +24,7 @@ public class JobRepository {
         applicationRepository.save(application);
     }
 
-    public Collection<Job> findJobs(Query query) {
+    public Collection<Job> find(Query query) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }
