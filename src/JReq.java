@@ -32,4 +32,12 @@ public class JReq implements Job {
     public boolean is(Recruiter recruiter) {
         return recruiter.equals(this.recruiter);
     }
+
+    public boolean is(Resume resume) {
+        return this.resume.equals(resume);
+    }
+
+    public void assertUniqueResume(Resume resume) {
+        if(resume.equals(this.resume)) throw new DuplicateResumeException();
+    }
 }

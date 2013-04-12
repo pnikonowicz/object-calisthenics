@@ -30,7 +30,8 @@ public class JobSeeker {
     public void apply(Job job) {
         Application application = null;
         if(job instanceof JReq) {
-             application = ((JReq) job).apply(this, resume);
+            ((JReq) job).assertUniqueResume(resume);
+            application = ((JReq) job).apply(this, resume);
         }
 
         if(job instanceof ATS) {
@@ -38,6 +39,7 @@ public class JobSeeker {
         }
 
         if(application == null) throw new UnsupportedOperationException("I don't know how to apply to this job: " + job);
+
 
         applicationRepository.save(application);
     }

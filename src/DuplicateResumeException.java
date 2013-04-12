@@ -1,12 +1,9 @@
 /**
  * Created with IntelliJ IDEA.
  * User: pnikonowicz
- * Date: 4/11/13
- * Time: 1:28 PM
+ * Date: 4/12/13
+ * Time: 2:50 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Job {
-    boolean is(Recruiter recruiter);
-
-
+public class DuplicateResumeException extends RuntimeException {
 }

@@ -13,12 +13,14 @@ public class JobSeekerIntegrationTest {
     private JobSeeker jobSeeker;
     private JobRepository jobRepository;
     private ApplicationRepository applicationRepository;
+    private Resume resume;
+    private JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository;
 
     @Before
     public void setUp() {
-        Resume resume = new Resume();
+        resume = new Resume();
         jobRepository = new JobRepository();
-        JobSeekerSavedForLaterJobRepository jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
+        jobSeekerSavedJobsRepository = new JobSeekerSavedForLaterJobRepository();
         applicationRepository = new ApplicationRepository();
         jobSeeker = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
     }
@@ -48,5 +50,17 @@ public class JobSeekerIntegrationTest {
         recruiter.post(job);
 
         jobSeeker.apply(job);
+    }
+
+    @Test(expected = DuplicateResumeException.class)
+    public void JobSeekersCanNotApplyToJobWithSomeoneElseResume() {
+        Recruiter recruiter = new Recruiter(jobRepository, applicationRepository, Mockito.mock(Name.class));
+        Job job = new JReq(resume, recruiter);
+        JobSeeker jobSeekerWithSomeoneElsesResume = new JobSeeker(resume, jobRepository, jobSeekerSavedJobsRepository, applicationRepository);
+
+        recruiter.post(job);
+        jobSeeker.apply(job);
+
+        jobSeekerWithSomeoneElsesResume.apply(job);
     }
 }
