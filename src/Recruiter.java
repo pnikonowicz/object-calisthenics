@@ -10,10 +10,12 @@ import java.util.Date;
  */
 public class Recruiter {
     private final JobRepository jobRepository;
+    private JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository;
     private Name name;
 
-    public Recruiter(JobRepository jobRepository) {
+    public Recruiter(JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
         this.jobRepository = jobRepository;
+        this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
     }
 
     public void post(Job job) {
@@ -29,7 +31,7 @@ public class Recruiter {
         Query dateQuery = new WasJobAppliedToOnThisDate(date);
         Query jobQuery  = new WasThisJobAppliedTo(job);
         Query query     = new Conjunction(jobQuery, dateQuery);
-        return jobRepository.findJobSeekers(query);
+        return jobSeekerSavedForLaterJobRepository.find(query);
     }
 
     public String toString() {

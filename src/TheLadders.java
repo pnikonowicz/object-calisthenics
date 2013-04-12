@@ -9,15 +9,17 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class TheLadders {
-    JobRepository jobRepository;
+    private final JobRepository jobRepository;
+    private final JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository;
 
-    public TheLadders(JobRepository jobRepository) {
+    public TheLadders(JobRepository jobRepository, JobSeekerSavedForLaterJobRepository jobSeekerSavedForLaterJobRepository) {
         this.jobRepository = jobRepository;
+        this.jobSeekerSavedForLaterJobRepository = jobSeekerSavedForLaterJobRepository;
     }
 
     public Collection<JobSeeker> whoAppliedToJobOn(Date date) {
         Query dateQuery = new WasJobAppliedToOnThisDate(date);
-        return jobRepository.findJobSeekers(dateQuery);
+        return jobSeekerSavedForLaterJobRepository.find(dateQuery);
     }
 
     public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {

@@ -13,4 +13,8 @@ public class ApplicationRepository {
     public void save(Application application) {
         applications.add(application);
     }
+
+    public Collection<ApplicationNumber> find(Query query) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }

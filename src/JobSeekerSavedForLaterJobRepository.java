@@ -12,4 +12,8 @@ public class JobSeekerSavedForLaterJobRepository {
     public void save(JobSeekerSavedForLaterJob job) {
         jobs.add(job);
     }
+
+    public Collection<JobSeeker> find(Query query) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
