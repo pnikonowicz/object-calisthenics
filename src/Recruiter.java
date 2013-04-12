@@ -1,4 +1,5 @@
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import java.util.Collection;
 import java.util.Date;
@@ -32,7 +33,7 @@ public class Recruiter {
     public Collection<JobSeeker> whoAppliedToJobOnDate(Job job, Date date) {
         Predicate dateQuery = new WasJobAppliedToOnThisDate(date);
         Predicate jobQuery  = new WasThisJobAppliedTo(job);
-        Predicate query     = new Conjunction(jobQuery, dateQuery);
+        Predicate query     = Predicates.and(dateQuery, jobQuery);
         return jobSeekerSavedForLaterJobRepository.find(query);
     }
 

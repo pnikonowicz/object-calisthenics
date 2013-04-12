@@ -1,4 +1,5 @@
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class TheLadders {
     public Collection<ApplicationNumber> list(Job job, Recruiter recruiter) {
         Predicate jobQuery = new WasThisJobAppliedTo(job);
         Predicate recruiterQuery = new WasThisTheRecruiter(recruiter);
-        Predicate conjunctionQuery = new Conjunction((jobQuery), recruiterQuery);
+        Predicate conjunctionQuery = Predicates.and(jobQuery, recruiterQuery);
         return applicationRepository.find(conjunctionQuery);
     }
 }
